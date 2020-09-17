@@ -42,6 +42,7 @@ function update (event) {
 }
 
 function startGame() {
+    // this will make the snake comes back in the opposite side
     if(snake[0].x > 15 * box && direction == 'right') snake[0].x = 0
     if(snake[0].x < 0 && direction == 'left') snake[0].x = 16 * box
     if(snake[0].y > 15 * box && direction == 'down') snake[0].y = 0
@@ -49,7 +50,7 @@ function startGame() {
 
     for(i = 1; i < snake.length; i++) {
         if(snake[0].x == snake[i].x && snake[0].y == snake[i].y) {
-            clearInterval(jogo)
+            clearInterval(game)
             alert('Game Over! :(')
         }
     }
@@ -67,8 +68,7 @@ function startGame() {
 
     if(snakeX != food.x || snakeY != food.y) {
         snake.pop()
-    }
-    else{
+    } else {
         food.x = Math.floor(Math.random() * 15 + 1) * box
         food.y = Math.floor(Math.random() * 15 + 1) * box
     }
@@ -81,4 +81,7 @@ function startGame() {
     snake.unshift(newHead)
 }
 
-let jogo = setInterval(startGame, 100)
+startGame()
+
+// here is where the magic happens
+let game = setInterval(startGame, 100)
